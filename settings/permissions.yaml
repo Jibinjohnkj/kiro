@@ -1,0 +1,490 @@
+rules:
+  - capability: shell
+    effect: allow
+    match:
+      - ls
+      - ls *
+      - pwd
+      - cd *
+      - cat *
+      - head *
+      - tail *
+      - wc *
+      - file *
+      - stat *
+      - du *
+      - tree *
+      - grep *
+      - rg *
+      - sort
+      - sort *
+      - uniq
+      - uniq *
+      - cut *
+      - tr *
+      - awk *
+      - sed *
+      - jq *
+      - yq *
+      - diff *
+      - cmp *
+      - comm *
+      - column *
+      - paste *
+      - nl *
+      - base64 *
+      - shasum *
+      - echo *
+      - printf *
+      - basename *
+      - dirname *
+      - realpath *
+      - date
+      - date *
+      - which *
+      - command -v *
+      - type *
+      - pyenv versions*
+      - mktemp *
+      - mkdir *
+      - "true"
+      - source .env
+      - xargs grep *
+      - xargs -I{} echo *
+      - textutil *
+      - pandoc *
+      - unzip -l *
+      - unzip -p *
+      - unzip * -d /tmp/*
+      - unzip * -d /private/tmp/*
+      - chmod +x *
+      - chmod u+x *
+      - ln -s *
+    exclude:
+      - ln -s* -f*
+      - ln -sf*
+  - capability: shell
+    effect: allow
+    match:
+      - find *
+    exclude:
+      - "*-delete*"
+      - "*-exec*"
+      - "*-ok *"
+      - "*-okdir*"
+      - "*-fprint*"
+  - capability: shell
+    effect: allow
+    match:
+      - rmdir /tmp/*
+      - rmdir /private/tmp/*
+      - unlink /tmp/*
+      - unlink /private/tmp/*
+      - touch /tmp/*
+      - touch /private/tmp/*
+      - tee /tmp/*
+      - tee /private/tmp/*
+    exclude:
+      - "* * *"
+      - "*..*"
+      - "*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+  - capability: shell
+    effect: allow
+    match:
+      - rm /tmp/*
+      - rm -f /tmp/*
+      - rm -r /tmp/*
+      - rm -R /tmp/*
+      - rm -rf /tmp/*
+      - rm -fr /tmp/*
+      - rm -Rf /tmp/*
+      - rm -fR /tmp/*
+      - rm -v /tmp/*
+      - rm -fv /tmp/*
+      - rm -rfv /tmp/*
+      - rm -d /tmp/*
+      - rm /private/tmp/*
+      - rm -f /private/tmp/*
+      - rm -r /private/tmp/*
+      - rm -R /private/tmp/*
+      - rm -rf /private/tmp/*
+      - rm -fr /private/tmp/*
+      - rm -Rf /private/tmp/*
+      - rm -fR /private/tmp/*
+      - rm -v /private/tmp/*
+      - rm -fv /private/tmp/*
+      - rm -rfv /private/tmp/*
+      - rm -d /private/tmp/*
+    exclude:
+      - "* * * * * * * * * * *"
+      - "*..*"
+      - "*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+  - capability: shell
+    effect: allow
+    match:
+      - mv /tmp/* /tmp/*
+      - mv /private/tmp/* /private/tmp/*
+      - tee -a /tmp/*
+      - tee -a /private/tmp/*
+      - rmdir -p /tmp/*
+      - chmod * /tmp/*
+      - chmod * /private/tmp/*
+    exclude:
+      - "* * * *"
+      - chmod -*
+      - "*..*"
+      - "*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+  - capability: shell
+    effect: allow
+    match:
+      - mv -f /tmp/* /tmp/*
+      - mv -n /tmp/* /tmp/*
+      - chmod -R * /tmp/*
+    exclude:
+      - "* * * * *"
+      - chmod -R -*
+      - "*..*"
+      - "*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+  - capability: shell
+    effect: allow
+    match:
+      - rm "/tmp/*"
+      - rm -f "/tmp/*"
+      - rm -r "/tmp/*"
+      - rm -R "/tmp/*"
+      - rm -rf "/tmp/*"
+      - rm -fr "/tmp/*"
+      - rm -Rf "/tmp/*"
+      - rm -fR "/tmp/*"
+      - rm -v "/tmp/*"
+      - rm -fv "/tmp/*"
+      - rm -rfv "/tmp/*"
+      - rm -d "/tmp/*"
+      - rmdir "/tmp/*"
+      - touch "/tmp/*"
+      - rm '/tmp/*'
+      - rm -f '/tmp/*'
+      - rm -r '/tmp/*'
+      - rm -R '/tmp/*'
+      - rm -rf '/tmp/*'
+      - rm -fr '/tmp/*'
+      - rm -Rf '/tmp/*'
+      - rm -fR '/tmp/*'
+      - rm -v '/tmp/*'
+      - rm -fv '/tmp/*'
+      - rm -rfv '/tmp/*'
+      - rm -d '/tmp/*'
+      - rmdir '/tmp/*'
+      - touch '/tmp/*'
+    exclude:
+      - '*"*"*"*'
+      - "*'*'*'*"
+      - "*..*"
+      - "*$(*"
+      - "*`*"
+  - capability: shell
+    effect: allow
+    match:
+      - mv "/tmp/*" "/tmp/*"
+      - mv -f "/tmp/*" "/tmp/*"
+    exclude:
+      - '*"*"*"*"*"*'
+      - "*$(*"
+      - "*$(*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+      - "*>*"
+      - "*<*"
+      - "*..*"
+      - "* -t*"
+      - "* --t*"
+      - |-
+        *
+        *
+  - capability: shell
+    effect: allow
+    match:
+      - rm /tmp/$(basename *)*
+      - rm "/tmp/$(basename *)*"
+      - rm -f /tmp/$(basename *)*
+      - rm -f "/tmp/$(basename *)*"
+      - rm -rf /tmp/$(basename *)*
+      - rm -rf "/tmp/$(basename *)*"
+    exclude:
+      - "*/tmp/$(basename *)* *"
+      - "*$(*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+      - "*>*"
+      - "*<*"
+      - "*..*"
+      - |-
+        *
+        *
+  - capability: shell
+    effect: allow
+    match:
+      - rm *
+    exclude:
+      - "* /*"
+      - '*"/*'
+      - "*'/*"
+      - "*\\*"
+      - "* ~*"
+      - "*$*"
+      - "*{*"
+      - "*..*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+      - "*>*"
+      - "*<*"
+      - |-
+        *
+        *
+  - capability: shell
+    effect: allow
+    match:
+      - ln -sf * /tmp/*
+      - tar -tf *
+      - tar -tzf *
+      - tar -xf * -C /tmp/*
+      - tar -xzf * -C /tmp/*
+    exclude:
+      - "* * * * * *"
+      - ln -sf -*
+      - "*..*"
+      - "*$(*"
+      - "*`*"
+      - "*&*"
+      - "*;*"
+      - "*|*"
+  - capability: shell
+    effect: allow
+    match:
+      - python
+      - python *
+      - python3
+      - python3 *
+      - python3.*
+      - .venv/bin/*
+      - ./.venv/bin/*
+      - venv/bin/*
+      - ./venv/bin/*
+      - ~/Workspace/*
+      - $HOME/Workspace/*
+      - ~/.pyenv/versions/*/bin/*
+      - $HOME/.pyenv/versions/*/bin/*
+      - ~/.pyenv/shims/python*
+      - $HOME/.pyenv/shims/python*
+      - pyenv exec python*
+      - ~/.kiro/skills/*/.venv/bin/*
+      - $HOME/.kiro/skills/*/.venv/bin/*
+      - /usr/bin/python3*
+      - /usr/local/bin/python*
+      - /opt/homebrew/bin/python*
+      - /tmp/*venv*/bin/*
+      - uv *
+      - poetry run *
+      - pipenv run *
+      - pip *
+      - pytest
+      - pytest *
+      - py.test *
+      - pylint *
+      - mypy *
+      - ruff check*
+      - black --check*
+      - terraform *
+      - git add *
+      - gh *
+      - cp *
+      - set *
+      - pgrep *
+      - od *
+      - $TOOL/.venv/bin/python *
+      - $T/.venv/bin/python *
+      - $S/.venv/bin/python *
+      - $SKILL/.venv/bin/python *
+      - $PY *
+      - '"$PY" *'
+  - capability: shell
+    effect: allow
+    match:
+      - git status*
+      - git * status*
+      - git log*
+      - git * log*
+      - git diff*
+      - git * diff*
+      - git show*
+      - git * show*
+      - git blame*
+      - git * blame*
+      - git grep*
+      - git * grep*
+      - git ls-files*
+      - git * ls-files*
+      - git ls-tree*
+      - git * ls-tree*
+      - git cat-file*
+      - git * cat-file*
+      - git rev-parse*
+      - git * rev-parse*
+      - git describe*
+      - git * describe*
+      - git shortlog*
+      - git * shortlog*
+      - git reflog*
+      - git * reflog*
+      - git remote -v*
+      - git * remote -v*
+      - git stash list*
+      - git * stash list*
+      - git fetch*
+      - git * fetch*
+      - git pull --ff-only*
+      - git * pull --ff-only*
+      - git branch
+      - git branch --show-current*
+      - git * branch --show-current*
+      - git branch -a*
+      - git branch -r*
+      - git branch -v*
+      - git branch --list*
+      - git branch --contains*
+      - git check-ignore*
+      - git * check-ignore*
+    exclude:
+      - "* commit*"
+      - "* push*"
+      - "* reset*"
+      - "* checkout*"
+      - "* switch*"
+      - "* restore*"
+      - "* clean*"
+      - "* rebase*"
+      - "* merge*"
+      - "* cherry-pick*"
+      - "* revert*"
+      - "* am *"
+      - "* apply*"
+      - "* format-patch*"
+      - "* add *"
+      - "* rm *"
+      - "* mv *"
+      - "* tag *"
+      - "* config *"
+      - "* stash drop*"
+      - "* stash pop*"
+      - "* stash clear*"
+      - "* branch -d*"
+      - "* branch -D*"
+      - "* branch -m*"
+      - "* branch -M*"
+      - "* update-ref*"
+      - "* filter-*"
+      - "* worktree*"
+      - "* submodule*"
+      - "* --output*"
+  - capability: shell
+    effect: ask
+    match:
+      - git push --force*
+      - git push -f*
+      - git * push --force*
+      - git * push -f*
+      - git reset --hard*
+      - git * reset --hard*
+      - git clean *
+      - git * clean *
+      - git branch -D*
+      - git * branch -D*
+  - capability: shell
+    effect: deny
+    match:
+      - sudo *
+      - rm -rf /
+      - rm -rf / *
+      - rm -rf ~
+      - rm -rf ~/
+      - rm -rf $HOME
+      - rm -rf "$HOME"
+      - rm -rf /Users*
+      - rm -rf /home*
+  - capability: filesystem
+    effect: allow
+    match:
+      - /tmp
+      - /tmp/**
+      - /tmp/**/.*
+      - /private/tmp
+      - /private/tmp/**
+      - /private/tmp/**/.*
+  - capability: fs_read
+    effect: allow
+    match:
+      - ~/Workspace/**
+      - ~/.kiro/skills/**
+      - .kiro/**
+      - ~/.kiro/sessions/**
+      - ~/.kiro/steering/**
+      - ~/.kiro/settings/permissions.yaml
+      - ~/.kiro
+  - capability: fs_read
+    effect: ask
+    match:
+      - "**/.env"
+      - "**/.env.*"
+      - "**/*.pem"
+      - "**/*.key"
+    exclude:
+      - /tmp/**
+      - /private/tmp/**
+  - capability: fs_write
+    effect: allow
+    match:
+      - ~/.kiro/steering/*.md
+  - capability: fs_write
+    effect: deny
+    match:
+      - "**/.env"
+      - "**/.env.*"
+    exclude:
+      - /tmp/**
+      - /private/tmp/**
+  - capability: web_search
+    effect: allow
+  - capability: web_fetch
+    effect: allow
+    match:
+      - github.com
+      - raw.githubusercontent.com
+      - api.github.com
+      - pypi.org
+      - kiro.dev
+  - capability: skill
+    effect: allow
+  - capability: subagent
+    effect: allow
